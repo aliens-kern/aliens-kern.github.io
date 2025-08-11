@@ -1,184 +1,838 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>aliens-kern</title><meta name="author" content="alienskern"><meta name="copyright" content="alienskern"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="website">
 <meta property="og:title" content="aliens-kern">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="aliens-kern">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
 <meta property="article:author" content="alienskern">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "aliens-kern",
-  "url": "http://example.com/"
-}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
-    (() => {
-      
-    const saveToLocal = {
-      set: (key, value, ttl) => {
-        if (!ttl) return
-        const expiry = Date.now() + ttl * 86400000
-        localStorage.setItem(key, JSON.stringify({ value, expiry }))
-      },
-      get: key => {
-        const itemStr = localStorage.getItem(key)
-        if (!itemStr) return undefined
-        const { value, expiry } = JSON.parse(itemStr)
-        if (Date.now() > expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return value
-      }
-    }
 
-    window.btf = {
-      saveToLocal,
-      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
-        const script = document.createElement('script')
-        script.src = url
-        script.async = true
-        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
-        script.onload = script.onreadystatechange = () => {
-          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
-        }
-        script.onerror = reject
-        document.head.appendChild(script)
-      }),
-      getCSS: (url, id) => new Promise((resolve, reject) => {
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href = url
-        if (id) link.id = id
-        link.onload = link.onreadystatechange = () => {
-          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
-        }
-        link.onerror = reject
-        document.head.appendChild(link)
-      }),
-      addGlobalFn: (key, fn, name = false, parent = window) => {
-        if (!false && key.startsWith('pjax')) return
-        const globalFn = parent.globalFn || {}
-        globalFn[key] = globalFn[key] || {}
-        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
-        parent.globalFn = globalFn
-      }
-    }
+<link rel="canonical" href="http://example.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>aliens-kern</title>
   
-      
-      const activateDarkMode = () => {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      const activateLightMode = () => {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
 
-      btf.activateDarkMode = activateDarkMode
-      btf.activateLightMode = activateLightMode
 
-      const theme = saveToLocal.get('theme')
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">aliens-kern</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
     
-          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
-        
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
       
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
-      }
-    
-      
-    const detectApple = () => {
-      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
   
-    })()
-  </script><script>const GLOBAL_CONFIG = {
-  root: '/',
-  algolia: undefined,
-  localSearch: undefined,
-  translate: undefined,
-  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
-  copy: {
-    success: '复制成功',
-    error: '复制失败',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: false,
-    post: false
-  },
-  runtime: '',
-  dateSuffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'null',
-  Snackbar: undefined,
-  infinitegrid: {
-    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
-    buttonText: '加载更多'
-  },
-  isPhotoFigcaption: false,
-  islazyloadPlugin: false,
-  isAnchor: false,
-  percent: {
-    toc: true,
-    rightside: false,
-  },
-  autoDarkmode: false
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: 'aliens-kern',
-  isHighlightShrink: false,
-  isToc: false,
-  pageType: 'home'
-}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">aliens-kern</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">aliens-kern</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/11/%E8%BF%91%E6%9C%9F%E7%8A%B6%E6%80%81/" title="近期状态与我的快乐">近期状态与我的快乐</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-11T15:16:35.000Z" title="发表于 2025-08-11 23:16:35">2025-08-11</time></span></div><div class="content">一点都不想上班。。。。即使上班没啥活。。。 当然有压力的学一些类似于产品经理的活。 我想以后做产品必然要经过的一关，虽然promptai已经很减少工作量了，但我还是感觉没有用，而且有点痛苦（在内行看多少带点无病呻吟）:sweat: 我现在特别想干两件事。 一是把我的个人博客搭的像样一点，butterfly多少有点难看，时间轴不明确。还有什么颜色 二是做一个set 今天刚刚把rekordbox盗版装好，5月份就做这个事，一直没动。 懒习惯导致的。。。。 我想，上班唯一快乐的事情就是通勤了。。。代替了我之前跑步的时段，让我能听点东西摄取信息。 只不过，之前听有信息量的音频。 现在我只想听音乐，DJ尤为想听。 路上不想听任何信息量，就想听电台。 所以我听到了近期最爱的三期，我简直爱疯了，让我特别想做个set。 但是美中不足的地方在于，我坐有轨，风声特别大，我耳机又是半开放，不降噪。所以我得把声音开到最大，有时候都听不到耳机放的什么。。。也许这会对我的耳朵造成伤害。  （ 我已经长期戴耳机了） 我为什么要写这篇，是因为我在刚刚找歌做大致select时，感到一种幸福感，这种幸福感就是：我听...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/10/%E6%B5%8B%E8%AF%952/" title="测试2">测试2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-10T14:42:01.000Z" title="发表于 2025-08-10 22:42:01">2025-08-10</time></span></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/04/%E5%9B%9E%E7%9C%8B%E7%81%B0%E6%9A%97%E6%97%B6%E6%AE%B5/" title="回看灰暗时段">回看灰暗时段</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-04T04:52:44.000Z" title="发表于 2025-08-04 12:52:44">2025-08-04</time></span></div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/04/%E4%B8%8D%E6%80%82/" title="不怂">不怂</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-04T04:47:34.000Z" title="发表于 2025-08-04 12:47:34">2025-08-04</time></span></div><div class="content">我今年22，我觉得现在二十多岁的年纪的人，普遍都求稳，都缺乏一种莽劲，这种莽不是特别具体，也不是什么有勇无谋。就是一股朦胧的冲劲。现在的人往往都是畏手畏脚，甚至想都不敢想，那股子青春的无畏的勇气究竟去哪了，是被自己的想象窄化了打败了，还是真的踢到社会的铁板了。 如果是被想象打败，那就有点怂，要是真踢到铁板，那咱也可以换个木板踹两脚。 还有一种就是精算自己的人生这种，每步都很重要，而且他们每步都能踩中，你说他缺乏勇气吗还真不是，他们是很理性的，有勇有谋，是最渴望那些世俗的好处的，也能看到他们身上的冲劲，为了得到好处而费劲力气。但那些冲劲总是不对劲，普遍都带着路径依赖的，或是机械麻木的，发狠的，就是比如说，考研考公，你说他们不够拼，那绝对是睁眼说瞎话。但那股拼劲感觉特别工具化，缺乏生命力，理想等等这些“虚”的东西。 当然这不是在说：我定义的冲劲就合理、否认路径依赖。这不是我的意思，世界由经验构成，路径依赖就是窄化的经验，一点毛病也没有。这里只是在区分他们的差异，和一些毛病。 这时候有人觉得自己社会化够了，化作老登，语重心长，作为过来人的角度去说：“唉你还是不了解社会的残酷，在当下的经...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/08/04/%E5%AE%A0%E7%89%A9%E5%81%8F%E8%A7%81/" title="宠物偏见">宠物偏见</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-08-04T04:46:13.000Z" title="发表于 2025-08-04 12:46:13">2025-08-04</time></span></div><div class="content">好像是一种直觉，我不知道是不是有种共性在里面。我之前一直不太理解什么傅首尔面相，因为我不看那些综艺对这个词语就不太了解。但是今天我能够get到一点了，就是我看到那个武大造谣的那个女生的b站号了，里面发的全是狗的视频，而且是小狗稍微带点卷毛，白色的。一下子让我有种“典”的感觉，直觉告诉我，她就是这类人的感觉。 我不知道是不是印象里的还是网络舆论，对这类人就有刻板印象，反正就是那种逆天或是精神不正常，没啥逻辑的人，普遍都养着这么一条小狗（刚刚查了下图册，知道品种了），以比熊泰迪吉娃娃博美小型犬为主，狗主人以女性为主。这类养这种小型犬的女性发起颠来，常见撒泼打滚，咄咄逼人，不讲道理，非常非常容易应激，狗咬人了犯错了，坚决不能对她家狗有任何行为。而且这类人常常爱发自己家狗视频，非常爱跟别人对线，偏执的爱狗。 小型犬的阴晴不定跟这类狗主情绪完全吻合 而且我对这类人特别警惕，就是把自己宠物当自己孩子养又没孩子的这种人，常以妈妈爸爸自称。面对这类人我持观察态度。 我不是厌恶养狗的，相反，在我印象里养大型犬的，不管是人还是狗，都还算正常，比较明事理，即使是把狗当自己孩子称呼，当出问题时也能及时制...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/31/firstblog/" title="firstblog">firstblog</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-07-31T14:36:59.000Z" title="发表于 2025-07-31 22:36:59">2025-07-31</time></span></div><div class="content">胡逼是一种feel </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/07/30/testblog/" title="testblog">testblog</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2025-07-30T03:55:53.000Z" title="发表于 2025-07-30 11:55:53">2025-07-30</time></span></div><div class="content">这是第一篇文章,使用typora写的 下面进行测试  1.2. 2 -      2  这是一级标题1这是代码块   引用  the end </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/09/25/hello-world/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-09-25T02:17:47.557Z" title="发表于 2023-09-25 10:17:47">2023-09-25</time></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">alienskern</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">8</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/11/%E8%BF%91%E6%9C%9F%E7%8A%B6%E6%80%81/" title="近期状态与我的快乐">近期状态与我的快乐</a><time datetime="2025-08-11T15:16:35.000Z" title="发表于 2025-08-11 23:16:35">2025-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/10/%E6%B5%8B%E8%AF%952/" title="测试2">测试2</a><time datetime="2025-08-10T14:42:01.000Z" title="发表于 2025-08-10 22:42:01">2025-08-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/04/%E5%9B%9E%E7%9C%8B%E7%81%B0%E6%9A%97%E6%97%B6%E6%AE%B5/" title="回看灰暗时段">回看灰暗时段</a><time datetime="2025-08-04T04:52:44.000Z" title="发表于 2025-08-04 12:52:44">2025-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/04/%E4%B8%8D%E6%80%82/" title="不怂">不怂</a><time datetime="2025-08-04T04:47:34.000Z" title="发表于 2025-08-04 12:47:34">2025-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/08/04/%E5%AE%A0%E7%89%A9%E5%81%8F%E8%A7%81/" title="宠物偏见">宠物偏见</a><time datetime="2025-08-04T04:46:13.000Z" title="发表于 2025-08-04 12:46:13">2025-08-04</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E4%B8%AA%E4%BA%BA%E6%96%87%E7%AB%A0/" style="font-size: 1.1em; color: #999">个人文章</a> <a href="/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/" style="font-size: 1.1em; color: #999">疑难杂症</a></div></div><div class="card-widget card-archives">
-    <div class="item-headline">
-      <i class="fas fa-archive"></i>
-      <span>归档</span>
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/11/%E8%BF%91%E6%9C%9F%E7%8A%B6%E6%80%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="alienskern">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aliens-kern">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/11/%E8%BF%91%E6%9C%9F%E7%8A%B6%E6%80%81/" class="post-title-link" itemprop="url">近期状态与我的快乐</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-08-11 23:16:35 / 修改时间：23:30:44" itemprop="dateCreated datePublished" datetime="2025-08-11T23:16:35+08:00">2025-08-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一点都不想上班。。。。即使上班没啥活。。。</p>
+<p>当然有压力的学一些类似于产品经理的活。</p>
+<p>我想以后做产品必然要经过的一关，虽然promptai已经很减少工作量了，但我还是感觉没有用，而且有点痛苦（在内行看多少带点无病呻吟）:sweat:</p>
+<p>我现在特别想干两件事。</p>
+<p>一是把我的个人博客搭的像样一点，butterfly多少有点难看，时间轴不明确。还有什么颜色</p>
+<p>二是做一个set</p>
+<p>今天刚刚把rekordbox盗版装好，5月份就做这个事，一直没动。</p>
+<p>懒习惯导致的。。。。</p>
+<p>我想，上班唯一快乐的事情就是通勤了。。。代替了我之前跑步的时段，让我能听点东西摄取信息。</p>
+<p>只不过，之前听有信息量的音频。 现在我只想听音乐，DJ尤为想听。</p>
+<p>路上不想听任何信息量，就想听电台。</p>
+<p>所以我听到了近期最爱的三期，我简直爱疯了，让我特别想做个set。</p>
+<p>但是美中不足的地方在于，我坐有轨，风声特别大，我耳机又是半开放，不降噪。所以我得把声音开到最大，有时候都听不到耳机放的什么。。。也许这会对我的耳朵造成伤害。  （ 我已经长期戴耳机了）</p>
+<p>我为什么要写这篇，是因为我在刚刚找歌做大致select时，感到一种幸福感，这种幸福感就是：我听到了我喜欢音乐。</p>
+<p>这就是我的快乐</p>
+
       
     </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
   
-    <ul class="card-archive-list">
+  
+  
+
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2025/08/">
-            <span class="card-archive-list-date">
-              八月 2025
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/10/%E6%B5%8B%E8%AF%952/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="alienskern">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aliens-kern">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/10/%E6%B5%8B%E8%AF%952/" class="post-title-link" itemprop="url">测试2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-08-10 22:42:01 / 修改时间：22:42:37" itemprop="dateCreated datePublished" datetime="2025-08-10T22:42:01+08:00">2025-08-10</time>
             </span>
-            <span class="card-archive-list-count">5</span>
-          </a>
-        </li>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2025/07/">
-            <span class="card-archive-list-date">
-              七月 2025
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/04/%E5%9B%9E%E7%9C%8B%E7%81%B0%E6%9A%97%E6%97%B6%E6%AE%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="alienskern">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aliens-kern">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/04/%E5%9B%9E%E7%9C%8B%E7%81%B0%E6%9A%97%E6%97%B6%E6%AE%B5/" class="post-title-link" itemprop="url">回看灰暗时段</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-08-04 12:52:44" itemprop="dateCreated datePublished" datetime="2025-08-04T12:52:44+08:00">2025-08-04</time>
             </span>
-            <span class="card-archive-list-count">2</span>
-          </a>
-        </li>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <li class="card-archive-list-item">
-          <a class="card-archive-list-link" href="/archives/2023/09/">
-            <span class="card-archive-list-date">
-              九月 2023
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/04/%E4%B8%8D%E6%80%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="alienskern">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aliens-kern">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/04/%E4%B8%8D%E6%80%82/" class="post-title-link" itemprop="url">不怂</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-08-04 12:47:34 / 修改时间：12:48:03" itemprop="dateCreated datePublished" datetime="2025-08-04T12:47:34+08:00">2025-08-04</time>
             </span>
-            <span class="card-archive-list-count">1</span>
-          </a>
-        </li>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-    </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">8</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-08-11T15:31:00.089Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By alienskern</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+          <p>我今年22，我觉得现在二十多岁的年纪的人，普遍都求稳，都缺乏一种莽劲，这种莽不是特别具体，也不是什么有勇无谋。就是一股朦胧的冲劲。现在的人往往都是畏手畏脚，甚至想都不敢想，那股子青春的无畏的勇气究竟去哪了，是被自己的想象窄化了打败了，还是真的踢到社会的铁板了。</p>
+<p>如果是被想象打败，那就有点怂，要是真踢到铁板，那咱也可以换个木板踹两脚。</p>
+<p>还有一种就是精算自己的人生这种，每步都很重要，而且他们每步都能踩中，你说他缺乏勇气吗还真不是，他们是很理性的，有勇有谋，是最渴望那些世俗的好处的，也能看到他们身上的冲劲，为了得到好处而费劲力气。但那些冲劲总是不对劲，普遍都带着路径依赖的，或是机械麻木的，发狠的，就是比如说，考研考公，你说他们不够拼，那绝对是睁眼说瞎话。但那股拼劲感觉特别工具化，缺乏生命力，理想等等这些“虚”的东西。</p>
+<p>当然这不是在说：我定义的冲劲就合理、否认路径依赖。这不是我的意思，世界由经验构成，路径依赖就是窄化的经验，一点毛病也没有。这里只是在区分他们的差异，和一些毛病。</p>
+<p>这时候有人觉得自己社会化够了，化作老登，语重心长，作为过来人的角度去说：“唉你还是不了解社会的残酷，在当下的经济环境下谈理想你太可笑了，缺少社会的毒打。”</p>
+<p>没问题，社会的客观因素我们无法改变，但是我有理想，有生命力，这是我自己的体现，是我存在的意义，是自我实现的目标。不论经济是上升还是下行，我都要有理想，理想就应该是美好的，令人向往的，远而大的，我就要为理想付出行动，同时保有自己的生命力。外界因素当然能影响你，但是经济上行你怎么不说这话，因为你也是主观的，你也想实现一些想法，但是你老是归结环境，丧失了自己的主体性，所以你来批评这个不切实际，那个不了解社会。你失败了或是懒惰，但请你别阻碍别人。</p>
+<p>这里引用王小波先生的文章</p>
+<blockquote>
+<p>当年欧几里得讲几何学，有学生发问道，这学问能带来什么好处？欧几里得叫奴隶给他一块钱，还讽刺他道：这位先生要从学问里找好处啊！</p>
+<p>又过了很多年，法拉第发现了电磁感应，演示给别人看，有位贵妇人说：这有什么用？法拉第反问道：刚生出来的小孩子有什么用？</p>
+<p>按中国人的标准，这个学生和贵妇有理，欧几里得和法拉第没有理：学以致用嘛，没有用处的学问哪能叫做学问。西方的智者却站在老师一边，赞美欧几里得和法拉第，鄙薄学生和贵妇。</p>
+<p>时至今日，我们已经看出，很直露地寻求好处，恐怕不是上策。这样既不能发现欧氏几何，也不能发现电磁感应，最后还要吃很大的亏。怎样在科学面前掩饰我们要好处的暧昧心情，成了一个难题。</p>
+</blockquote>
+<p>我觉得有些事，不懂不明白，就应该勇敢一点，获取到一个观点或看法，合自己性格，符合自己价值观的。这时候不用把这个东西想的特别周全，构成一个闭环，让外界来啥你都能解释。 这样有可能就陷进去了。</p>
+<p>莽一点，你就拿它积极的那一面，应对这个世界就行了，不懂的不清楚的想不明白的想法，就让他搁着，先tm的弄了再说，就像小说一样，先tm写好看了再说什么其他的事。回头再说到底哪个地方得整明白，这些时候往往都是碰出来的，就是你脑子里朦胧的东西，在这件事作为动机的引导下，你一梳理变的清晰。获得这个顿悟之后，回看过往的那些事一切都“通了”，原来他们从这个角度看，是同一件事啊或是终于不再是看见那么简单了，而是注意到了。</p>
+<p>就像这篇文章，其实没写多完整，好多地方都有漏洞，不管，先他妈的发了，先他妈的莽，办得好or办得不好总得有事找你，先tm干就完了。</p>
+<p>不用畏手畏脚，年轻人就得燥，就得干他丫的，就得有这股朋克劲，这才有生命力。也别老定义自己，喜欢啥就干啥，如果被管习惯了，成为一种不可缺少的因素，那就去管着的地方。有些人活了一辈子就是为了受人管着。有些人放逐流浪，有些人知足常乐，有些人摇摆不定，有些人心安理得。</p>
+<p>每一种生活，都值得被尊重，也值得拿出来挨两鞭子。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/04/%E5%AE%A0%E7%89%A9%E5%81%8F%E8%A7%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="alienskern">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aliens-kern">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/08/04/%E5%AE%A0%E7%89%A9%E5%81%8F%E8%A7%81/" class="post-title-link" itemprop="url">宠物偏见</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-08-04 12:46:13 / 修改时间：12:46:45" itemprop="dateCreated datePublished" datetime="2025-08-04T12:46:13+08:00">2025-08-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>好像是一种直觉，我不知道是不是有种共性在里面。我之前一直不太理解什么傅首尔面相，因为我不看那些综艺对这个词语就不太了解。但是今天我能够get到一点了，就是我看到那个武大造谣的那个女生的b站号了，里面发的全是狗的视频，而且是小狗稍微带点卷毛，白色的。一下子让我有种“典”的感觉，直觉告诉我，她就是这类人的感觉。</p>
+<p>我不知道是不是印象里的还是网络舆论，对这类人就有刻板印象，反正就是那种逆天或是精神不正常，没啥逻辑的人，普遍都养着这么一条小狗（刚刚查了下图册，知道品种了），以比熊泰迪吉娃娃博美小型犬为主，狗主人以女性为主。这类养这种小型犬的女性发起颠来，常见撒泼打滚，咄咄逼人，不讲道理，非常非常容易应激，狗咬人了犯错了，坚决不能对她家狗有任何行为。而且这类人常常爱发自己家狗视频，非常爱跟别人对线，偏执的爱狗。</p>
+<p>小型犬的阴晴不定跟这类狗主情绪完全吻合</p>
+<p>而且我对这类人特别警惕，就是把自己宠物当自己孩子养又没孩子的这种人，常以妈妈爸爸自称。面对这类人我持观察态度。</p>
+<p>我不是厌恶养狗的，相反，在我印象里养大型犬的，不管是人还是狗，都还算正常，比较明事理，即使是把狗当自己孩子称呼，当出问题时也能及时制止训斥。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/31/firstblog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="alienskern">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aliens-kern">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/31/firstblog/" class="post-title-link" itemprop="url">firstblog</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-07-31 22:36:59 / 修改时间：22:40:04" itemprop="dateCreated datePublished" datetime="2025-07-31T22:36:59+08:00">2025-07-31</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>胡逼是一种feel</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/30/testblog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="alienskern">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aliens-kern">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/07/30/testblog/" class="post-title-link" itemprop="url">testblog</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-07-30 11:55:53" itemprop="dateCreated datePublished" datetime="2025-07-30T11:55:53+08:00">2025-07-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-07-31 23:20:26" itemprop="dateModified" datetime="2025-07-31T23:20:26+08:00">2025-07-31</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这是第一篇文章,使用typora写的</p>
+<p>下面进行测试</p>
+<hr>
+<p>1.<br>2. 2</p>
+<p>- </p>
+<ul>
+<li><input disabled="" type="checkbox"> </li>
+<li><input checked="" disabled="" type="checkbox"> 2</li>
+</ul>
+<h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是代码块</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>引用</p>
+</blockquote>
+<p>the end</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/25/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="alienskern">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aliens-kern">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/25/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-09-25 10:17:47" itemprop="dateCreated datePublished" datetime="2023-09-25T10:17:47+08:00">2023-09-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">alienskern</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">alienskern</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
